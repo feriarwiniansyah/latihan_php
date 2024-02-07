@@ -24,7 +24,7 @@
 <?php
 function divide($dividend, $divisor) {
   if($divisor == 0) {
-    throw new Exception("Salah itu wajar!!!!!!!!!!!", 8);
+    throw new Exception("tetap semangat abangku!!!", 8);
   }
   return $dividend / $divisor;
 }
