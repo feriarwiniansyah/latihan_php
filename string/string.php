@@ -159,10 +159,13 @@
 															echo "<br>";
 															print "World";
 
-															echo "<br>";
+															echo "<hr>";
 
 															$arr = array('Hello','World!','Beautiful','Day!');
+															$ayy = array('Belajar','php');
 															echo join(" ",$arr);
+															echo "<hr>";
+															echo join(" ",$ayy);
 															?>
 														<!-- akhir syntax php -->
 

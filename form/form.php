@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-
-		<meta charset="UTF-8">
-		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
-		<meta name="Author" content="Spruko Technologies Private Limited">
-		<meta name="Keywords" content="admin,admin dashboard,admin dashboard template,admin panel template,admin template,admin theme,bootstrap 4 admin template,bootstrap 4 dashboard,bootstrap admin,bootstrap admin dashboard,bootstrap admin panel,bootstrap admin template,bootstrap admin theme,bootstrap dashboard,bootstrap form template,bootstrap panel,bootstrap ui kit,dashboard bootstrap 4,dashboard design,dashboard html,dashboard template,dashboard ui kit,envato templates,flat ui,html,html and css templates,html dashboard template,html5,jquery html,premium,premium quality,sidebar bootstrap 4,template admin bootstrap 4"/>
-
-		<!-- Title -->
-		<title> Azira -  Premium dashboard ui bootstrap rwd admin html5 template </title>
+<!DOCTYPE HTML>  
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<style>
+.error {color: #FF0000;}
+</style>
 
 		<!--- Favicon --->
 		<link rel="icon" href="../assets/img/brand/favicon.png" type="image/x-icon"/>
@@ -28,41 +22,10 @@
 		<!--- Animations css --->
 		<link href="../assets/css/animate.css" rel="stylesheet">
 
-		<style>
-				body {
-					background-image: url(imgbag.jpg);
-					background-repeat: no-repeat;
-					background-size: 100%;
-					
-				}
-
-				body ::before {
-					content: "";
-					position: absolute;
-					top: 0;
-					left: 0;
-					bottom: 0;
-					right: 0;
-					background: rgba(219, 207, 207, 0);
-					backdrop-filter: blur(2px);
-					z-index: -1;
-				}
-		</style>
-	</head>
-
-	<body class="main-body">
-
-		<!-- Loader -->
-		<div id="global-loader">
-			<img src="../assets/img/loaders/loader-4.svg" class="loader-img" alt="Loader">
-		</div>
-		<!-- /Loader -->
-
-  
-				<!-- row -->
-				<div class="row row-sm m-2 mt-3">
-					<div class="col-lg-4">
-						<div class="card mg-b-20 bg-primary-transparent">
+</head>
+<body>  
+<div class="d-flex" style="margin-left: 20%;">
+<div class="card bg-primary" style="margin-top: 7px; width: 30%%; height: 95vh;">
 							<div class="card-body">
 								<div class="ps-0">
 									<div class="main-profile-overview">
@@ -79,7 +42,7 @@
 										<div class="main-profile-bio text-black">
 											<p>tugas php dasar dengan menggunakan gabungan template Azira</p>
 										</div><!-- main-profile-bio -->
-										<hr>
+										
 										<div class="main-profile-work-list">
 											<div class="media">
 												<div class="media-logo bg-danger-transparent text-black">
@@ -91,7 +54,7 @@
 												</div>
 											</div>
 										</div><!-- main-profile-work-list -->
-										<hr class="mg-y-30">
+										
 										<label class="main-content-label tx-13 mg-b-20">Sosial</label>
 										<div class="main-profile-social-list">
 											<div class="media">
@@ -110,235 +73,115 @@
 											</div>
 											<div class="media">
 											</div>
+											
 										</div><!-- main-profile-social-list -->
 									</div><!-- main-profile-overview -->
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-8">
-						<div class="main-content-body main-content-body-profile">
-							<div class="">
-								<div class="wideget-user-tab">
-									<div class="tab-menu-heading bg-primary-transparent">
-										<div class="tabs-menu1 ">
-											<ul class="nav">
-												<li><a href="#tab-61" data-bs-toggle="tab" class="add-to-cart btn btn-default text-black"><h5>MATERI</h5></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
+						<div class="">
+						<div class="bg-primary card" style="width: 99%; height: 30px; margin-left: 7px; margin-top: 8px;">
+							<p style="margin-left: 45%; margin-top: 3px;">MATERI</p>
+						</div>
+						<div class="card bg-primary" style="margin-top: 2px; margin-left: 7px;">
+							<?php
+							// define variables and set to empty values
+							$nameErr = $emailErr = $genderErr = $websiteErr = "";
+							$name = $email = $gender = $comment = $website = "";
+
+							if ($_SERVER["REQUEST_METHOD"] == "POST") {
+							if (empty($_POST["name"])) {
+								$nameErr = "Name is required";
+							} else {
+								$name = test_input($_POST["name"]);
+								// check if name only contains letters and whitespace
+								if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+								$nameErr = "Only letters and white space allowed";
+								}
+							}
+							
+							if (empty($_POST["email"])) {
+								$emailErr = "Email is required";
+							} else {
+								$email = test_input($_POST["email"]);
+								// check if e-mail address is well-formed
+								if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+								$emailErr = "Invalid email format";
+								}
+							}
+								
+							if (empty($_POST["website"])) {
+								$website = "";
+							} else {
+								$website = test_input($_POST["website"]);
+								// check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+								if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+								$websiteErr = "Invalid URL";
+								}
+							}
+
+							if (empty($_POST["comment"])) {
+								$comment = "";
+							} else {
+								$comment = test_input($_POST["comment"]);
+							}
+
+							if (empty($_POST["gender"])) {
+								$genderErr = "Gender is required";
+							} else {
+								$gender = test_input($_POST["gender"]);
+							}
+							}
+
+							function test_input($data) {
+							$data = trim($data);
+							$data = stripslashes($data);
+							$data = htmlspecialchars($data);
+							return $data;
+							}
+							?>
+							<div class="m-4">
+							<h2>PHP Form Validation Example</h2>
+							<p><span class="error">* required field</span></p>
+							<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+							Name: <input type="text" name="name" value="<?php echo $name;?>">
+							<span class="error">* <?php echo $nameErr;?></span>
+							<br><br>
+							E-mail: <input type="text" name="email" value="<?php echo $email;?>">
+							<span class="error">* <?php echo $emailErr;?></span>
+							<br><br>
+							Website: <input type="text" name="website" value="<?php echo $website;?>">
+							<span class="error"><?php echo $websiteErr;?></span>
+							<br><br>
+							Comment: <textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
+							<br><br>
+							Gender:
+							<input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="female">Female
+							<input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?> value="male">Male
+							<input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
+							<span class="error">* <?php echo $genderErr;?></span>
+							<br><br>
+							<input type="submit" name="submit" value="Submit">  
+							</form>
+
 							</div>
 
-							<div class="tab-content">
-								<div id="tab-61">
-									<ul class="widget-users row ps-0 mb-5">
-										<li class="col-xl-4 col-lg-6  col-md-6 col-sm-12 col-12">
-											<div class="card border p-0 bg-primary-transparent">
-													<div class="card-body text-center text-black">
-														<h1>MATERI</h1>
-														<hr>
-														<h1>From</h1>
-													</div>
-											</div>
-										</li>
-										<li class="col-xl-4 col-lg-6  col-md-6 col-sm-12 col-12">
-											<div class="card border p-0  bg-primary-transparent">
-													<div class="card-body text-left text-black">
-													<p>digunakan pada saat ingin membuat suatu element yang bisa untuk menginput data</p>
-											</div>
-										</li>
-										<li class="col-xl-4 col-lg-6  col-md-6 col-sm-12 col-12">
-											<div class="card border p-0 bg-primary-transparent">
-													<div class="card-body text-left text-black">
-														<h5>CONTOH Frpm</h5>
-														<hr>
-														<!-- syntax php -->
-														<?php
-															// define variables and set to empty values
-															$nameErr = $emailErr = $genderErr = $websiteErr = "";
-															$name = $email = $gender = $comment = $website = "";
-
-															if ($_SERVER["REQUEST_METHOD"] == "POST") {
-															if (empty($_POST["name"])) {
-																$nameErr = "Name is required";
-															} else {
-																$name = test_input($_POST["name"]);
-																// check if name only contains letters and whitespace
-																if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-																$nameErr = "Only letters and white space allowed";
-																}
-															}
-															
-															if (empty($_POST["email"])) {
-																$emailErr = "Email is required";
-															} else {
-																$email = test_input($_POST["email"]);
-																// check if e-mail address is well-formed
-																if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-																$emailErr = "Invalid email format";
-																}
-															}
-																
-															if (empty($_POST["website"])) {
-																$website = "";
-															} else {
-																$website = test_input($_POST["website"]);
-																// check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-																if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
-																$websiteErr = "Invalid URL";
-																}
-															}
-
-															if (empty($_POST["comment"])) {
-																$comment = "";
-															} else {
-																$comment = test_input($_POST["comment"]);
-															}
-
-															if (empty($_POST["gender"])) {
-																$genderErr = "Gender is required";
-															} else {
-																$gender = test_input($_POST["gender"]);
-															}
-															}
-
-															function test_input($data) {
-															$data = trim($data);
-															$data = stripslashes($data);
-															$data = htmlspecialchars($data);
-															return $data;
-															}
-															?>
-
-															<h6>PHP Form Validation Example</h6>
-															<p><span class="error" style="color: red;">* required field</span></p>
-															<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-															Name: <input type="text" name="name" value="<?php echo $name;?>">
-															<span class="error">* <?php echo $nameErr;?></span>
-															<br><br>
-															E-mail: <input type="text" name="email" value="<?php echo $email;?>">
-															<span class="error">* <?php echo $emailErr;?></span>
-															<br><br>
-															Website: <input type="text" name="website" value="<?php echo $website;?>">
-															<span class="error"><?php echo $websiteErr;?></span>
-															<br><br>
-															<!-- Comment: <textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea> -->
-															<br><br>
-															Gender:
-															<input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="female">Female
-															<input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?> value="male">Male
-															<input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
-															<span class="error">* <?php echo $genderErr;?></span>
-															<br><br>
-															<input type="submit" name="submit" value="Submit">  
-															</form>
-
-															<?php
-															echo "<h2>Your Input:</h2>";
-															echo $name;
-															echo "<br>";
-															echo $email;
-															echo "<br>";
-															echo $website;
-															echo "<br>";
-															echo $comment;
-															echo "<br>";
-															echo $gender;
-														?>
-														<!-- akhir syntax php -->
-
-													</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
+							<?php
+							
+							echo "<h2>Your Input:</h2>";
+							echo $name;
+							echo "<br>";
+							echo $email;
+							echo "<br>";
+							echo $website;
+							echo "<br>";
+							echo $comment;
+							echo "<br>";
+							echo $gender;
+							?>
 						</div>
 					</div>
-				</div>
-				<!-- row closed -->
-			</div>
-			<!-- Container closed -->
-		</div>
-		<!-- main-content closed -->
 
-		<!--Sidebar-right-->
-		<div class="sidebar sidebar-right sidebar-animate">
-			<div class="panel panel-primary card mb-0">
-				<div class="panel-body tabs-menu-body p-0 border-0">
-					<ul class="page-signin-style">
-						<li class="">
-							<h1 class="animated ">belajar php</h1>
-							<p class="animated ">Feri Arwiniansyah</p>
-							<p class="animated "> XI RPL</p>
-						</li>
-					</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--/Sidebar-right-->
-
-		<!-- Footer opened -->
-		<div class="main-footer ht-45">
-			<div class="container-fluid pd-t-0-f ht-100p">
-					<span> Copyright © 2022 <a   href="javascript:void(0);" class="text-primary">Azira</a>. Designed with <span class="fa fa-heart text-danger"></span> by <a   href="javascript:void(0);"> Spruko </a> All rights reserved.</span>
-			</div>
-		</div>
-		<!-- Footer closed -->
-	</div>
-		<!-- page closed -->
-
-		<!--- Back-to-top --->
-		<a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
-
-		<!--- JQuery min js --->
-		<script src="../assets/plugins/jquery/jquery.min.js"></script>
-
-		<!--- Bootstrap Bundle js --->
-		<script src="../assets/plugins/bootstrap/popper.min.js"></script>
-		<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-		<!--- Ionicons js --->
-		<script src="../assets/plugins/ionicons/ionicons.js"></script>
-
-		<!--- Moment js --->
-		<script src="../assets/plugins/moment/moment.js"></script>
-
-		<!--- JQuery sparkline js --->
-		<script src="../assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
-
-		<!--- P-scroll js --->
-		<script src="../assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-		<script src="../assets/plugins/perfect-scrollbar/p-scroll.js"></script>
-
-
-
-		<!--- Sidebar js --->
-		<script src="../assets/plugins/side-menu/sidemenu.js"></script>
-
-		<!--- sticky js --->
-		<script src="../assets/js/sticky.js"></script>
-
-		<!--- Right-sidebar js --->
-		<script src="../assets/plugins/sidebar/sidebar.js"></script>
-		<script src="../assets/plugins/sidebar/sidebar-custom.js"></script>
-
-		<!--- Eva-icons js --->
-		<script src="../assets/js/eva-icons.min.js"></script>
-
-		<!--- Index js --->
-		<script src="../assets/js/script.js"></script>
-
-		<!--themecolor js-->
-		<script src="../assets/js/themecolor.js"></script>
-
-		<!--swither-styles js-->
-		<script src="../assets/js/swither-styles.js"></script>
-
-		<!--- Custom js --->
-		<script src="../assets/js/custom.js"></script>
-
-	</body>
+						</div>
+</body>
 </html>
