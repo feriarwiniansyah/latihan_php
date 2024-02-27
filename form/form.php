@@ -131,7 +131,7 @@
 							} else {
 								$gender = test_input($_POST["gender"]);
 							}
-							}
+							
 
 							function test_input($data) {
 							$data = trim($data);
